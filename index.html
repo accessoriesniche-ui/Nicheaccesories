@@ -1,0 +1,1622 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Niche Accessories | Luxury Watches & Fine Accessories</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Playfair Display for Luxury Headings & Inter for UI -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        gold: {
+                            50: '#fbf8f1',
+                            100: '#f5efe0',
+                            200: '#eadbc0',
+                            300: '#dcc296',
+                            400: '#c8a46e', // Professional Champagne Gold
+                            500: '#b38b52',
+                            600: '#96703f',
+                            700: '#785734',
+                        },
+                        obsidian: '#090b10',
+                        charcoal: '#12151e'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar & Luxury Champagne Gold Accents */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #090b10;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #232838;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #c8a46e;
+        }
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #f5efe0 0%, #c8a46e 50%, #96703f 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gold-gradient-bg {
+            background: linear-gradient(135deg, #dcc296 0%, #c8a46e 50%, #b38b52 100%);
+        }
+    </style>
+</head>
+<body class="bg-obsidian text-gray-100 font-sans antialiased selection:bg-gold-400 selection:text-obsidian overflow-x-hidden">
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-gradient-to-r from-charcoal via-slate-900 to-charcoal border-b border-slate-800/80 text-xs py-2.5 px-4">
+        <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
+            <p class="text-gray-300 flex items-center gap-2">
+                <i class="fa-solid fa-crown text-gold-400"></i>
+                <span>Complimentary Express Delivery Across Morocco! Use code <strong class="text-gold-400">NICHE10</strong> for 10% OFF.</span>
+            </p>
+            <div class="flex items-center gap-4 ml-auto">
+                <span class="text-gray-400 hidden sm:inline"><i class="fa-solid fa-shield-halved text-gold-400 mr-1"></i> 2-Year Movement Warranty</span>
+                <!-- Currency Selector -->
+                <select id="currencySelector" onchange="changeCurrency(this.value)" class="bg-slate-900 text-gold-400 border border-slate-700 rounded px-2 py-0.5 text-xs font-medium focus:outline-none focus:border-gold-400 cursor-pointer">
+                    <option value="MAD">MAD (DH)</option>
+                    <option value="USD">USD ($)</option>
+                    <option value="EUR">EUR (€)</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-40 bg-obsidian/90 backdrop-blur-md border-b border-slate-800/80 transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- Mobile Menu Button -->
+            <button onclick="toggleMobileMenu()" class="lg:hidden p-2.5 text-gray-300 hover:text-gold-400 focus:outline-none rounded-lg border border-slate-800">
+                <i id="mobileMenuIcon" class="fa-solid fa-bars text-xl"></i>
+            </button>
+
+            <!-- Brand Logo -->
+            <a href="#" class="flex flex-col items-center lg:items-start group">
+                <span class="font-serif text-xl sm:text-2xl font-bold tracking-[0.2em] text-white group-hover:text-gold-400 transition-colors">
+                    NICHE ACCESSORIES
+                </span>
+                <span class="text-[10px] tracking-[0.35em] text-gold-400 uppercase font-medium -mt-0.5">
+                    Haute Horlogerie &amp; Bijoux
+                </span>
+            </a>
+
+            <!-- Desktop Navigation Links -->
+            <nav class="hidden lg:flex items-center space-x-8 text-sm font-medium">
+                <a href="#home" class="text-gold-400 hover:text-gold-300 transition">Home</a>
+                <a href="#catalog" onclick="filterCategory('all')" class="text-gray-300 hover:text-gold-400 transition">All Collection</a>
+                <a href="#catalog" onclick="filterCategory('watches')" class="text-gray-300 hover:text-gold-400 transition">Luxury Watches</a>
+                <a href="#catalog" onclick="filterCategory('jewelry')" class="text-gray-300 hover:text-gold-400 transition">Bracelets &amp; Rings</a>
+                <a href="#catalog" onclick="filterCategory('leather')" class="text-gray-300 hover:text-gold-400 transition">Sunglasses &amp; Leather</a>
+            </nav>
+
+            <!-- Action Icons (Search, Cart, & Hidden-by-default Admin Button) -->
+            <div class="flex items-center space-x-2 sm:space-x-3">
+                <!-- HIDDEN FROM CLIENTS BY DEFAULT! Only shows after entering PIN -->
+                <button id="secretAdminBtn" onclick="openAdminModal()" class="hidden px-3 py-2 rounded-full bg-gold-400/15 hover:bg-gold-400/25 border border-gold-400 text-gold-400 text-xs font-semibold transition items-center gap-1.5" title="Gérer vos produits">
+                    <i class="fa-solid fa-user-shield"></i>
+                    <span class="hidden md:inline">Admin</span>
+                </button>
+                <button onclick="toggleSearchBar()" class="p-2.5 text-gray-300 hover:text-gold-400 hover:bg-slate-900 rounded-full transition" title="Search Products">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+                <button onclick="toggleCartDrawer()" class="relative p-2.5 text-gray-300 hover:text-gold-400 hover:bg-slate-900 rounded-full transition flex items-center gap-2 border border-slate-800 px-3.5">
+                    <i class="fa-solid fa-bag-shopping text-gold-400"></i>
+                    <span class="text-xs font-semibold hidden sm:inline">Bag</span>
+                    <span id="cartCountBadge" class="bg-gold-400 text-obsidian text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">0</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Expandable Search Bar -->
+        <div id="searchBarContainer" class="hidden border-t border-slate-800 bg-charcoal px-4 py-3">
+            <div class="max-w-3xl mx-auto relative flex items-center">
+                <i class="fa-solid fa-magnifying-glass text-gray-400 absolute left-4"></i>
+                <input 
+                    type="text" 
+                    id="topSearchInput" 
+                    oninput="handleSearch(this.value)"
+                    placeholder="Search watches, chronographs, bracelets, sunglasses, wallets..." 
+                    class="w-full bg-obsidian border border-slate-700 focus:border-gold-400 rounded-full py-2.5 pl-11 pr-10 text-sm text-white placeholder-gray-500 focus:outline-none"
+                >
+                <button onclick="clearSearch()" class="absolute right-4 text-gray-400 hover:text-white text-xs">Clear</button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobileMenu" class="hidden lg:hidden bg-charcoal border-b border-slate-800 px-6 py-5 space-y-3">
+            <a href="#home" onclick="toggleMobileMenu()" class="block py-2 text-gold-400 font-medium border-b border-slate-800/60">Home</a>
+            <a href="#catalog" onclick="filterCategory('all'); toggleMobileMenu()" class="block py-2 text-gray-200 hover:text-gold-400 border-b border-slate-800/60">All Collection</a>
+            <a href="#catalog" onclick="filterCategory('watches'); toggleMobileMenu()" class="block py-2 text-gray-200 hover:text-gold-400 border-b border-slate-800/60">Luxury Watches</a>
+            <a href="#catalog" onclick="filterCategory('jewelry'); toggleMobileMenu()" class="block py-2 text-gray-200 hover:text-gold-400 border-b border-slate-800/60">Bracelets &amp; Cuffs</a>
+            <a href="#catalog" onclick="filterCategory('leather'); toggleMobileMenu()" class="block py-2 text-gray-200 hover:text-gold-400 border-b border-slate-800/60">Sunglasses &amp; Leather</a>
+            <a href="#features" onclick="toggleMobileMenu()" class="block py-2 text-gray-200 hover:text-gold-400">About Niche Accessories</a>
+        </div>
+    </header>
+
+    <!-- Hero Banner Section -->
+    <section id="home" class="relative overflow-hidden border-b border-slate-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-24 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            
+            <!-- Left Column: Copy -->
+            <div class="lg:col-span-7 space-y-6 text-center lg:text-left z-10">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gold-400/10 border border-gold-400/30 text-gold-300 text-xs uppercase tracking-widest font-semibold">
+                    <span class="w-2 h-2 rounded-full bg-gold-400 animate-pulse"></span>
+                    Niche Accessories • Signature Edition
+                </div>
+                <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-white">
+                    Define Your Presence With <span class="gold-gradient-text italic">Rare Elegance</span>
+                </h1>
+                <p class="text-gray-300 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 font-light leading-relaxed">
+                    Welcome to <strong class="text-white font-medium">Niche Accessories</strong>. Discover hand-selected luxury timepieces, precision chronographs, and bespoke men’s &amp; women’s accessories crafted for refined taste.
+                </p>
+                <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                    <a href="#catalog" class="w-full sm:w-auto px-8 py-4 rounded-xl gold-gradient-bg text-obsidian font-bold text-sm uppercase tracking-wider hover:opacity-95 transition shadow-lg shadow-gold-400/20 flex items-center justify-center gap-2">
+                        <span>Explore Collection</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                    <button onclick="openFeaturedModal()" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-charcoal hover:bg-slate-800 text-white border border-slate-700 font-semibold text-sm uppercase tracking-wider transition flex items-center justify-center gap-2">
+                        <i class="fa-regular fa-gem text-gold-400"></i>
+                        <span>View Flagship Watch</span>
+                    </button>
+                </div>
+
+                <!-- Mini Stats -->
+                <div class="pt-6 grid grid-cols-3 gap-4 border-t border-slate-800/80 max-w-lg mx-auto lg:mx-0">
+                    <div>
+                        <p class="font-serif text-2xl sm:text-3xl font-bold text-gold-400">100%</p>
+                        <p class="text-xs text-gray-400 uppercase tracking-wider">Premium Grade</p>
+                    </div>
+                    <div>
+                        <p class="font-serif text-2xl sm:text-3xl font-bold text-white">4.9/5</p>
+                        <p class="text-xs text-gray-400 uppercase tracking-wider">Verified Clients</p>
+                    </div>
+                    <div>
+                        <p class="font-serif text-2xl sm:text-3xl font-bold text-gold-400">24/48h</p>
+                        <p class="text-xs text-gray-400 uppercase tracking-wider">Express Delivery</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Featured Visual Showcase -->
+            <div class="lg:col-span-5 relative">
+                <div class="absolute -inset-4 bg-gradient-to-tr from-gold-500/20 via-transparent to-gold-300/10 rounded-3xl blur-2xl"></div>
+                <div class="relative bg-charcoal border border-slate-800 rounded-3xl p-4 sm:p-6 shadow-2xl">
+                    <div class="relative rounded-2xl overflow-hidden aspect-[4/5] bg-slate-900">
+                        <img 
+                            src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1000&q=80" 
+                            onerror="this.src='https://placehold.co/600x750/12151e/c8a46e?text=Niche+Accessories'"
+                            alt="Niche Accessories Royal Edition" 
+                            class="w-full h-full object-cover object-center hover:scale-105 transition duration-700"
+                        >
+                        <div class="absolute top-4 left-4 bg-obsidian/80 backdrop-blur-md border border-gold-400/40 text-gold-400 text-xs font-bold px-3 py-1.5 rounded-full">
+                            BEST SELLER
+                        </div>
+                        <div class="absolute bottom-4 inset-x-4 bg-obsidian/90 backdrop-blur-md border border-slate-800 p-4 rounded-xl flex items-center justify-between">
+                            <div>
+                                <p class="text-xs text-gold-400 uppercase tracking-wider">Limited Edition</p>
+                                <h3 class="font-serif text-lg font-bold text-white">Royal Chrono Gold</h3>
+                            </div>
+                            <button onclick="quickAddHeroProduct()" class="px-4 py-2 rounded-lg gold-gradient-bg text-obsidian font-bold text-xs uppercase tracking-wider hover:scale-105 transition">
+                                Add to Bag
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Category Highlights Strip -->
+    <section class="py-12 bg-charcoal/50 border-b border-slate-800/70">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Category Card 1 -->
+                <div onclick="filterCategory('watches')" class="group cursor-pointer relative rounded-2xl overflow-hidden border border-slate-800 bg-charcoal h-52 flex items-end p-6">
+                    <img src="https://images.unsplash.com/photo-1547996160-81dfa63595aa?auto=format&fit=crop&w=800&q=80" onerror="this.src='https://placehold.co/600x400/12151e/c8a46e?text=Luxury+Watches'" alt="Watches" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:scale-110 group-hover:opacity-60 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/50 to-transparent"></div>
+                    <div class="relative z-10 w-full flex justify-between items-end">
+                        <div>
+                            <span class="text-xs text-gold-400 uppercase tracking-widest font-semibold">Precision &amp; Prestige</span>
+                            <h3 class="font-serif text-2xl font-bold text-white mt-0.5">Luxury Watches</h3>
+                        </div>
+                        <span class="w-10 h-10 rounded-full bg-gold-400/20 border border-gold-400/50 flex items-center justify-center text-gold-400 group-hover:bg-gold-400 group-hover:text-obsidian transition">
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Category Card 2 -->
+                <div onclick="filterCategory('jewelry')" class="group cursor-pointer relative rounded-2xl overflow-hidden border border-slate-800 bg-charcoal h-52 flex items-end p-6">
+                    <img src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=800&q=80" onerror="this.src='https://placehold.co/600x400/12151e/c8a46e?text=Bracelets+%26+Cuffs'" alt="Jewelry" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:scale-110 group-hover:opacity-60 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/50 to-transparent"></div>
+                    <div class="relative z-10 w-full flex justify-between items-end">
+                        <div>
+                            <span class="text-xs text-gold-400 uppercase tracking-widest font-semibold">18K Plated &amp; Steel</span>
+                            <h3 class="font-serif text-2xl font-bold text-white mt-0.5">Bracelets &amp; Rings</h3>
+                        </div>
+                        <span class="w-10 h-10 rounded-full bg-gold-400/20 border border-gold-400/50 flex items-center justify-center text-gold-400 group-hover:bg-gold-400 group-hover:text-obsidian transition">
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Category Card 3 -->
+                <div onclick="filterCategory('leather')" class="group cursor-pointer relative rounded-2xl overflow-hidden border border-slate-800 bg-charcoal h-52 flex items-end p-6">
+                    <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=800&q=80" onerror="this.src='https://placehold.co/600x400/12151e/c8a46e?text=Shades+%26+Leather'" alt="Leather & Shades" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:scale-110 group-hover:opacity-60 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/50 to-transparent"></div>
+                    <div class="relative z-10 w-full flex justify-between items-end">
+                        <div>
+                            <span class="text-xs text-gold-400 uppercase tracking-widest font-semibold">Everyday Essentials</span>
+                            <h3 class="font-serif text-2xl font-bold text-white mt-0.5">Shades &amp; Leather</h3>
+                        </div>
+                        <span class="w-10 h-10 rounded-full bg-gold-400/20 border border-gold-400/50 flex items-center justify-center text-gold-400 group-hover:bg-gold-400 group-hover:text-obsidian transition">
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Product Catalog Section -->
+    <section id="catalog" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Section Title & Filter Controls -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
+            <div>
+                <span class="text-xs font-semibold uppercase tracking-[0.25em] text-gold-400">Niche Accessories Boutique</span>
+                <h2 class="font-serif text-3xl sm:text-4xl font-bold text-white mt-1">Our Curated Collection</h2>
+            </div>
+
+            <!-- Filter Pills & Sort -->
+            <div class="flex flex-wrap items-center gap-2 sm:gap-3">
+                <button onclick="filterCategory('all')" id="tab-all" class="category-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition gold-gradient-bg text-obsidian">
+                    All Items
+                </button>
+                <button onclick="filterCategory('watches')" id="tab-watches" class="category-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-medium bg-charcoal text-gray-300 hover:text-white border border-slate-800 transition">
+                    Watches
+                </button>
+                <button onclick="filterCategory('jewelry')" id="tab-jewelry" class="category-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-medium bg-charcoal text-gray-300 hover:text-white border border-slate-800 transition">
+                    Bracelets &amp; Rings
+                </button>
+                <button onclick="filterCategory('leather')" id="tab-leather" class="category-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-medium bg-charcoal text-gray-300 hover:text-white border border-slate-800 transition">
+                    Sunglasses &amp; Wallets
+                </button>
+
+                <!-- Sort Dropdown -->
+                <select id="sortSelect" onchange="handleSort(this.value)" class="bg-charcoal text-gray-200 border border-slate-800 rounded-xl px-3 py-2 text-xs sm:text-sm focus:outline-none focus:border-gold-400 cursor-pointer ml-auto md:ml-2">
+                    <option value="featured">Sort: Featured</option>
+                    <option value="price-asc">Price: Low to High</option>
+                    <option value="price-desc">Price: High to Low</option>
+                    <option value="rating">Top Rated</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Product Grid Container -->
+        <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Dynamically populated by JavaScript -->
+        </div>
+
+        <!-- Empty State (Hidden by default) -->
+        <div id="emptyState" class="hidden text-center py-16 bg-charcoal/40 rounded-2xl border border-slate-800">
+            <i class="fa-solid fa-magnifying-glass text-4xl text-gold-400 mb-3"></i>
+            <h3 class="font-serif text-xl font-bold text-white">No matching accessories found</h3>
+            <p class="text-gray-400 text-sm mt-1">Try clearing your search filter or selecting another category.</p>
+            <button onclick="resetFilters()" class="mt-4 px-5 py-2.5 rounded-xl gold-gradient-bg text-obsidian font-bold text-xs uppercase tracking-wider">
+                Show All Products
+            </button>
+        </div>
+    </section>
+
+    <!-- Gift Sets & Bundle Promo Banner -->
+    <section class="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="relative rounded-3xl overflow-hidden bg-gradient-to-r from-charcoal via-slate-900 to-charcoal border border-gold-400/30 p-8 sm:p-12 shadow-2xl">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <div class="lg:col-span-7 space-y-4">
+                    <span class="px-3 py-1 rounded-full bg-gold-400/20 text-gold-300 text-xs font-bold uppercase tracking-widest">
+                        Exclusive Prestige Box
+                    </span>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-bold text-white">
+                        The Niche Accessories Royal Gift Set
+                    </h2>
+                    <p class="text-gray-300 text-sm sm:text-base leading-relaxed">
+                        Looking for the unforgettable gift? Our signature VIP box combines an Automatic Skeleton Timepiece, a braided Italian leather bracelet, and polarized aviator shades in a handcrafted presentation box.
+                    </p>
+                    <div class="pt-2 flex flex-wrap items-center gap-4">
+                        <button onclick="addToCart(8)" class="px-6 py-3.5 rounded-xl gold-gradient-bg text-obsidian font-bold text-xs sm:text-sm uppercase tracking-wider hover:opacity-95 transition">
+                            Add VIP Box to Bag
+                        </button>
+                        <button onclick="openQuickView(8)" class="px-5 py-3.5 rounded-xl bg-obsidian hover:bg-slate-800 text-gray-200 border border-slate-700 text-xs sm:text-sm font-medium transition">
+                            Inspect Box Details
+                        </button>
+                    </div>
+                </div>
+                <div class="lg:col-span-5">
+                    <img 
+                        src="https://images.unsplash.com/photo-1509941943102-10c232535736?auto=format&fit=crop&w=900&q=80" 
+                        onerror="this.src='https://placehold.co/600x400/12151e/c8a46e?text=VIP+Gift+Box'"
+                        alt="Luxury Watch Gift Box" 
+                        class="w-full h-64 sm:h-72 object-cover rounded-2xl border border-slate-700 shadow-lg"
+                    >
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Niche Accessories -->
+    <section id="features" class="py-16 bg-charcoal/60 border-t border-b border-slate-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-xs uppercase tracking-[0.25em] text-gold-400 font-semibold">The House Standard</span>
+                <h2 class="font-serif text-3xl font-bold text-white mt-1">Why Choose Niche Accessories</h2>
+                <p class="text-gray-400 text-sm mt-2">Every timepiece and accessory goes through a rigorous 12-point inspection before reaching your wrist.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-obsidian p-6 rounded-2xl border border-slate-800/90 hover:border-gold-400/50 transition">
+                    <div class="w-12 h-12 rounded-xl bg-gold-400/10 border border-gold-400/30 flex items-center justify-center text-gold-400 text-xl mb-4">
+                        <i class="fa-solid fa-gem"></i>
+                    </div>
+                    <h3 class="font-serif text-lg font-bold text-white mb-2">316L Surgical Steel &amp; Sapphire</h3>
+                    <p class="text-gray-400 text-xs leading-relaxed">Scratch-resistant sapphire crystal glass and non-tarnish 316L stainless steel crafted to last a lifetime.</p>
+                </div>
+
+                <div class="bg-obsidian p-6 rounded-2xl border border-slate-800/90 hover:border-gold-400/50 transition">
+                    <div class="w-12 h-12 rounded-xl bg-gold-400/10 border border-gold-400/30 flex items-center justify-center text-gold-400 text-xl mb-4">
+                        <i class="fa-solid fa-truck-fast"></i>
+                    </div>
+                    <h3 class="font-serif text-lg font-bold text-white mb-2">Fast Cash on Delivery</h3>
+                    <p class="text-gray-400 text-xs leading-relaxed">Express 24–48h doorstep delivery across Morocco with Cash on Delivery (COD) after inspection.</p>
+                </div>
+
+                <div class="bg-obsidian p-6 rounded-2xl border border-slate-800/90 hover:border-gold-400/50 transition">
+                    <div class="w-12 h-12 rounded-xl bg-gold-400/10 border border-gold-400/30 flex items-center justify-center text-gold-400 text-xl mb-4">
+                        <i class="fa-solid fa-award"></i>
+                    </div>
+                    <h3 class="font-serif text-lg font-bold text-white mb-2">2-Year Movement Warranty</h3>
+                    <p class="text-gray-400 text-xs leading-relaxed">Complete peace of mind with our 24-month warranty covering all automatic and quartz watch movements.</p>
+                </div>
+
+                <div class="bg-obsidian p-6 rounded-2xl border border-slate-800/90 hover:border-gold-400/50 transition">
+                    <div class="w-12 h-12 rounded-xl bg-gold-400/10 border border-gold-400/30 flex items-center justify-center text-gold-400 text-xl mb-4">
+                        <i class="fa-solid fa-gift"></i>
+                    </div>
+                    <h3 class="font-serif text-lg font-bold text-white mb-2">Luxury Gift Packaging</h3>
+                    <p class="text-gray-400 text-xs leading-relaxed">Every order arrives in a signature Niche Accessories presentation box with an authenticity card.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-obsidian pt-16 pb-10 border-t border-slate-800 text-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-slate-800">
+                <!-- Col 1: Brand -->
+                <div class="space-y-4">
+                    <div>
+                        <span class="font-serif text-2xl font-bold tracking-widest text-white">NICHE ACCESSORIES</span>
+                        <p class="text-[10px] tracking-[0.35em] text-gold-400 uppercase font-medium">Haute Horlogerie &amp; Bijoux</p>
+                    </div>
+                    <p class="text-gray-400 text-xs leading-relaxed">
+                        Your premier destination for luxury watches, men's &amp; women's jewelry, fine leather goods, and statement eyewear.
+                    </p>
+                    <!-- Social Icons without external URLs for Instagram & TikTok -->
+                    <div class="flex space-x-3 pt-1">
+                        <button type="button" onclick="showToast('Our official Instagram page is launching very soon!')" class="w-9 h-9 rounded-full bg-charcoal border border-slate-800 flex items-center justify-center text-gray-300 hover:text-gold-400 hover:border-gold-400 transition" title="Instagram (Coming Soon)">
+                            <i class="fa-brands fa-instagram"></i>
+                        </button>
+                        <button type="button" onclick="showToast('Our official TikTok page is launching very soon!')" class="w-9 h-9 rounded-full bg-charcoal border border-slate-800 flex items-center justify-center text-gray-300 hover:text-gold-400 hover:border-gold-400 transition" title="TikTok (Coming Soon)">
+                            <i class="fa-brands fa-tiktok"></i>
+                        </button>
+                        <button type="button" onclick="openWhatsAppDirect()" class="w-9 h-9 rounded-full bg-charcoal border border-slate-800 flex items-center justify-center text-gray-300 hover:text-green-400 hover:border-green-400 transition" title="WhatsApp Direct">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </button>
+                        <a href="mailto:accessoriesniche@gmail.com" class="w-9 h-9 rounded-full bg-charcoal border border-slate-800 flex items-center justify-center text-gray-300 hover:text-gold-400 hover:border-gold-400 transition" title="Email Us">
+                            <i class="fa-regular fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Col 2: Shop Categories -->
+                <div>
+                    <h4 class="font-serif text-white font-semibold mb-4">Collections</h4>
+                    <ul class="space-y-2.5 text-xs text-gray-400">
+                        <li><a href="#catalog" onclick="filterCategory('watches')" class="hover:text-gold-400 transition">Automatic &amp; Chronograph Watches</a></li>
+                        <li><a href="#catalog" onclick="filterCategory('jewelry')" class="hover:text-gold-400 transition">Cuff Bracelets &amp; Chains</a></li>
+                        <li><a href="#catalog" onclick="filterCategory('leather')" class="hover:text-gold-400 transition">Polarized Sunglasses</a></li>
+                        <li><a href="#catalog" onclick="filterCategory('leather')" class="hover:text-gold-400 transition">Genuine Leather Wallets &amp; Belts</a></li>
+                        <li><a href="#catalog" onclick="openQuickView(8)" class="hover:text-gold-400 transition">VIP Prestige Gift Boxes</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Client Care -->
+                <div>
+                    <h4 class="font-serif text-white font-semibold mb-4">Client Concierge</h4>
+                    <ul class="space-y-2.5 text-xs text-gray-400">
+                        <li>
+                            <a href="https://wa.me/212776337140" target="_blank" class="hover:text-gold-400 transition">
+                                <i class="fa-brands fa-whatsapp text-gold-400 mr-2"></i> 0776337140
+                            </a>
+                        </li>
+                        <li>
+                            <a href="mailto:accessoriesniche@gmail.com" class="hover:text-gold-400 transition">
+                                <i class="fa-solid fa-envelope text-gold-400 mr-2"></i> accessoriesniche@gmail.com
+                            </a>
+                        </li>
+                        <li><i class="fa-solid fa-location-dot text-gold-400 mr-2"></i> Express Doorstep Delivery Nationwide</li>
+                        <li><i class="fa-solid fa-clock text-gold-400 mr-2"></i> Mon – Sun: 9:00 AM – 10:00 PM</li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: VIP Newsletter -->
+                <div>
+                    <h4 class="font-serif text-white font-semibold mb-4">Join the VIP Club</h4>
+                    <p class="text-xs text-gray-400 mb-3">Subscribe for private sales, limited edition watch drops, and 10% off your first order.</p>
+                    <form onsubmit="handleNewsletter(event)" class="space-y-2">
+                        <input 
+                            type="email" 
+                            required 
+                            placeholder="Enter your email address..." 
+                            class="w-full bg-charcoal border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-gold-400"
+                        >
+                        <button type="submit" class="w-full py-2.5 rounded-xl gold-gradient-bg text-obsidian font-bold text-xs uppercase tracking-wider hover:opacity-95 transition">
+                            Subscribe
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div id="footer" class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500 gap-4">
+                <p class="flex items-center gap-2">
+                    <span>&copy; 2026 <strong class="text-gray-300">Niche Accessories</strong>. All rights reserved.</span>
+                    <!-- DISCREET OWNER LOCK ICON (No PIN hint shown!) -->
+                    <button onclick="openOwnerPinModal()" class="text-slate-700 hover:text-gold-400 transition ml-1" title="Administration">
+                        <i class="fa-solid fa-lock text-[10px]"></i>
+                    </button>
+                </p>
+                <div class="flex items-center gap-4 text-base text-gray-400">
+                    <i class="fa-brands fa-cc-visa"></i>
+                    <i class="fa-brands fa-cc-mastercard"></i>
+                    <i class="fa-brands fa-apple-pay"></i>
+                    <span class="text-xs px-2 py-0.5 rounded bg-charcoal border border-slate-700 text-gold-400">Cash on Delivery</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- OWNER PIN AUTHENTICATION MODAL (Protects Admin Panel - DOES NOT DISPLAY THE PIN CODE!) -->
+    <div id="ownerPinModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/85 backdrop-blur-sm p-4">
+        <div class="bg-charcoal border border-gold-400/40 rounded-3xl max-w-sm w-full p-6 text-center shadow-2xl relative">
+            <button onclick="closeOwnerPinModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-obsidian border border-slate-700 text-gray-400 hover:text-white flex items-center justify-center">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="w-12 h-12 rounded-2xl bg-gold-400/10 border border-gold-400/30 flex items-center justify-center text-gold-400 text-xl mx-auto mb-3">
+                <i class="fa-solid fa-lock"></i>
+            </div>
+            <h3 class="font-serif text-xl font-bold text-white">Espace Administration</h3>
+            <p class="text-xs text-gray-400 mt-1 mb-4">Accès réservé uniquement au propriétaire de Niche Accessories.</p>
+            <form onsubmit="verifyOwnerPin(event)" class="space-y-3">
+                <input 
+                    type="password" 
+                    id="ownerPinInput" 
+                    placeholder="••••" 
+                    required 
+                    autocomplete="off"
+                    class="w-full bg-obsidian border border-slate-700 rounded-xl px-4 py-2.5 text-center text-sm tracking-widest text-white focus:outline-none focus:border-gold-400"
+                >
+                <button type="submit" class="w-full py-3 rounded-xl gold-gradient-bg text-obsidian font-bold text-xs uppercase tracking-wider hover:opacity-95 transition">
+                    Déverrouiller
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- QUICK VIEW PRODUCT MODAL -->
+    <div id="quickViewModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+        <div class="bg-charcoal border border-slate-700 rounded-3xl max-w-3xl w-full overflow-hidden shadow-2xl relative animate-fadeIn">
+            <button onclick="closeQuickView()" class="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-obsidian/80 text-gray-300 hover:text-gold-400 flex items-center justify-center border border-slate-700">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div id="quickViewContent" class="grid grid-cols-1 md:grid-cols-2">
+                <!-- Dynamically filled by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE-OVER SHOPPING CART DRAWER -->
+    <div id="cartDrawerOverlay" class="fixed inset-0 z-50 hidden bg-black/75 backdrop-blur-sm transition-opacity">
+        <div class="fixed inset-y-0 right-0 max-w-md w-full bg-charcoal border-l border-slate-800 shadow-2xl flex flex-col justify-between">
+            
+            <!-- Drawer Header -->
+            <div class="p-6 border-b border-slate-800 flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                    <i class="fa-solid fa-bag-shopping text-gold-400 text-lg"></i>
+                    <h3 class="font-serif text-xl font-bold text-white">Your Shopping Bag</h3>
+                </div>
+                <button onclick="toggleCartDrawer()" class="w-8 h-8 rounded-full bg-obsidian border border-slate-700 text-gray-400 hover:text-white flex items-center justify-center">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Cart Items List -->
+            <div id="cartItemsContainer" class="flex-1 overflow-y-auto p-6 space-y-4">
+                <!-- Populated by JS -->
+            </div>
+
+            <!-- Cart Footer / Checkout Form -->
+            <div class="p-6 bg-obsidian border-t border-slate-800 space-y-4">
+                <!-- Promo Code Input -->
+                <div class="flex gap-2">
+                    <input 
+                        type="text" 
+                        id="promoInput" 
+                        placeholder="Promo code (Try NICHE10)" 
+                        class="flex-1 bg-charcoal border border-slate-700 rounded-xl px-3 py-2 text-xs text-white uppercase focus:outline-none focus:border-gold-400"
+                    >
+                    <button onclick="applyPromoCode()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-gold-400 font-semibold text-xs transition">
+                        Apply
+                    </button>
+                </div>
+
+                <!-- Totals -->
+                <div class="space-y-1.5 text-sm border-t border-slate-800/80 pt-3">
+                    <div class="flex justify-between text-gray-400 text-xs">
+                        <span>Subtotal</span>
+                        <span id="cartSubtotal">0 MAD</span>
+                    </div>
+                    <div id="discountRow" class="hidden justify-between text-green-400 text-xs">
+                        <span>VIP Discount (10%)</span>
+                        <span id="cartDiscount">-0 MAD</span>
+                    </div>
+                    <div class="flex justify-between text-gray-400 text-xs">
+                        <span>Shipping</span>
+                        <span class="text-gold-400 font-medium">FREE</span>
+                    </div>
+                    <div class="flex justify-between text-white font-bold text-base pt-2 border-t border-slate-800">
+                        <span>Total</span>
+                        <span id="cartTotal" class="text-gold-400">0 MAD</span>
+                    </div>
+                </div>
+
+                <!-- Checkout Buttons -->
+                <div class="space-y-2.5 pt-1">
+                    <button onclick="openCheckoutModal()" class="w-full py-3.5 rounded-xl gold-gradient-bg text-obsidian font-bold text-xs uppercase tracking-wider hover:opacity-95 transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-lock"></i>
+                        <span>Complete Order (Cash on Delivery)</span>
+                    </button>
+                    <button onclick="checkoutViaWhatsApp()" class="w-full py-3 rounded-xl bg-green-600/20 hover:bg-green-600/30 text-green-400 border border-green-500/40 font-semibold text-xs uppercase tracking-wider transition flex items-center justify-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-base"></i>
+                        <span>Order Instantly via WhatsApp</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CASH ON DELIVERY CHECKOUT MODAL (Sends Order Directly to accessoriesniche@gmail.com) -->
+    <div id="checkoutModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+        <div class="bg-charcoal border border-slate-700 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative">
+            <button onclick="closeCheckoutModal()" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-obsidian border border-slate-700 text-gray-400 hover:text-white flex items-center justify-center">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="mb-6">
+                <span class="text-xs text-gold-400 uppercase tracking-widest font-semibold">Express Checkout</span>
+                <h3 class="font-serif text-2xl font-bold text-white mt-0.5">Delivery Information</h3>
+                <p class="text-xs text-gray-400 mt-1">Fill in your details below. Pay safely in cash upon delivery.</p>
+            </div>
+            <form id="checkoutForm" onsubmit="submitOrder(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs text-gray-300 mb-1 font-medium">Full Name (Nom Complet) *</label>
+                    <input type="text" id="custName" name="Client_Name" required placeholder="Enter your full name" class="w-full bg-obsidian border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-gold-400">
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs text-gray-300 mb-1 font-medium">Phone Number (Téléphone) *</label>
+                        <input type="tel" id="custPhone" name="Phone_Number" required placeholder="06 / 07..." class="w-full bg-obsidian border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-gold-400">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-gray-300 mb-1 font-medium">City (Ville) *</label>
+                        <input type="text" id="custCity" name="City" required placeholder="Agadir, Casablanca, Rabat..." class="w-full bg-obsidian border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-gold-400">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs text-gray-300 mb-1 font-medium">Delivery Address (Adresse Complète) *</label>
+                    <input type="text" id="custAddress" name="Address" required placeholder="Neighborhood, Street, House/Apt number" class="w-full bg-obsidian border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-gold-400">
+                </div>
+                <button type="submit" id="confirmOrderBtn" class="w-full py-4 rounded-xl gold-gradient-bg text-obsidian font-bold text-sm uppercase tracking-wider hover:opacity-95 transition mt-2 flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-paper-plane"></i>
+                    <span>Confirm My Order</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ADMIN PRODUCT MANAGER MODAL (ZID PRODUIT + TSWIRA + PRIX) -->
+    <div id="adminModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/85 backdrop-blur-sm p-4 overflow-y-auto">
+        <div class="bg-charcoal border border-gold-400/40 rounded-3xl max-w-4xl w-full p-6 sm:p-8 shadow-2xl relative my-8 max-h-[90vh] overflow-y-auto">
+            <button onclick="closeAdminModal()" class="absolute top-5 right-5 w-9 h-9 rounded-full bg-obsidian border border-slate-700 text-gray-400 hover:text-white flex items-center justify-center">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="mb-6 border-b border-slate-800 pb-4">
+                <span class="text-xs text-gold-400 uppercase tracking-widest font-semibold flex items-center gap-2">
+                    <i class="fa-solid fa-crown"></i> Espace Propriétaire Privé — Niche Accessories
+                </span>
+                <h3 class="font-serif text-2xl sm:text-3xl font-bold text-white mt-1">Gérer les Produits, Prix &amp; Photos</h3>
+                <p class="text-xs text-gray-400 mt-1">Zid les produits dyalk w dir <strong class="text-gold-400">"Copier Code"</strong> bash t-collih f <code class="text-gold-300">index.html</code> (Ligne 544) bash yban l ga3 les clients!</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <!-- Left: Form to Add/Edit Product -->
+                <form id="adminProductForm" onsubmit="handleSaveProduct(event)" class="lg:col-span-7 space-y-4 bg-obsidian/70 p-5 rounded-2xl border border-slate-800">
+                    <h4 id="adminFormTitle" class="font-serif text-lg font-bold text-gold-400 border-b border-slate-800 pb-2">
+                        + Zid Produit Jdid
+                    </h4>
+                    <input type="hidden" id="editProductId" value="">
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                        <div>
+                            <label class="block text-xs text-gray-300 mb-1 font-medium">Ism l-Produit (Nom) *</label>
+                            <input type="text" id="prodName" required placeholder="Ex: Rolex Datejust Gold" class="w-full bg-charcoal border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-gold-400">
+                        </div>
+                        <div>
+                            <label class="block text-xs text-gray-300 mb-1 font-medium">Catégorie *</label>
+                            <select id="prodCategory" class="w-full bg-charcoal border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-gold-400">
+                                <option value="watches">Watches (Sa3at)</option>
+                                <option value="jewelry">Bracelets &amp; Rings (Khwatem/Bracelets)</option>
+                                <option value="leather">Sunglasses &amp; Wallets (Lunettes/Cuir)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
+                        <div>
+                            <label class="block text-xs text-gray-300 mb-1 font-medium">Thaman Jdid (MAD) *</label>
+                            <input type="number" id="prodPrice" required min="1" placeholder="Ex: 890" class="w-full bg-charcoal border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-gold-400">
+                        </div>
+                        <div>
+                            <label class="block text-xs text-gray-300 mb-1 font-medium">Thaman Lqdim (MAD)</label>
+                            <input type="number" id="prodOldPrice" min="1" placeholder="Ex: 1200" class="w-full bg-charcoal border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-gold-400">
+                        </div>
+                        <div>
+                            <label class="block text-xs text-gray-300 mb-1 font-medium">Badge (L-Fوق)</label>
+                            <input type="text" id="prodBadge" placeholder="Ex: NEW ARRIVAL" class="w-full bg-charcoal border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-gold-400">
+                        </div>
+                    </div>
+
+                    <!-- Photo Upload OR URL -->
+                    <div class="space-y-2 pt-1">
+                        <label class="block text-xs text-gray-300 font-medium">Tswira dyal l-Produit (Photo) *</label>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 items-center">
+                            <label class="cursor-pointer bg-charcoal hover:bg-slate-800 border border-dashed border-gold-400/60 rounded-xl p-3 text-center transition flex flex-col items-center justify-center gap-1">
+                                <i class="fa-solid fa-cloud-arrow-up text-gold-400 text-lg"></i>
+                                <span class="text-[11px] text-gray-200 font-semibold">Khtar Tswira mn Téléphone / PC</span>
+                                <input type="file" id="prodImageFile" accept="image/*" onchange="handleImageUpload(event)" class="hidden">
+                            </label>
+                            <div class="flex items-center gap-3">
+                                <img id="adminImagePreview" src="https://placehold.co/120x120/12151e/c8a46e?text=Apercu" alt="Preview" class="w-14 h-14 rounded-xl object-cover border border-slate-700">
+                                <div class="flex-1">
+                                    <input type="text" id="prodImageUrl" oninput="updatePreviewFromUrl(this.value)" placeholder="Awla 7ot Lien (https://...)" class="w-full bg-charcoal border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-gold-400">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs text-gray-300 mb-1 font-medium">Mouwassafat Qsira (Specs)</label>
+                        <input type="text" id="prodSpecs" placeholder="Ex: 41mm Case • Sapphire Glass • Waterproof" class="w-full bg-charcoal border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-gold-400">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs text-gray-300 mb-1 font-medium">Wasf l-Produit (Description)</label>
+                        <textarea id="prodDesc" rows="2" placeholder="Wasf aniq dyal sa3a wla l-accessoire..." class="w-full bg-charcoal border border-slate-700 rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-gold-400"></textarea>
+                    </div>
+
+                    <div class="flex items-center gap-3 pt-2">
+                        <button type="submit" class="flex-1 py-3.5 rounded-xl gold-gradient-bg text-obsidian font-bold text-xs uppercase tracking-wider hover:opacity-95 transition">
+                            <i class="fa-solid fa-check mr-1"></i> Enregistrer l-Produit f Site
+                        </button>
+                        <button type="button" onclick="resetAdminForm()" class="px-4 py-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-gray-300 text-xs font-semibold transition">
+                            Vider
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Right: Current Products List (Edit / Delete / Copy Code) -->
+                <div class="lg:col-span-5 flex flex-col justify-between bg-obsidian/70 p-5 rounded-2xl border border-slate-800">
+                    <div>
+                        <div class="flex items-center justify-between border-b border-slate-800 pb-2 mb-3">
+                            <h4 class="font-serif text-base font-bold text-white">Les Produits (<span id="adminProdCount">0</span>)</h4>
+                            <button onclick="copyProductsCode()" class="px-2.5 py-1 rounded-lg bg-gold-400/20 border border-gold-400/50 text-[11px] text-gold-400 font-semibold hover:bg-gold-400 hover:text-obsidian transition flex items-center gap-1" title="Copier le code pour index.html">
+                                <i class="fa-regular fa-copy"></i> Copier Code
+                            </button>
+                        </div>
+                        <div id="adminProductList" class="space-y-2.5 max-h-80 overflow-y-auto pr-1">
+                            <!-- Dynamically populated -->
+                        </div>
+                    </div>
+
+                    <div class="mt-4 pt-3 border-t border-slate-800 text-[11px] text-gray-400 leading-relaxed space-y-1.5">
+                        <p><i class="fa-solid fa-circle-info text-gold-400 mr-1"></i> <strong>Kifach yban l ga3 les clients?</strong></p>
+                        <p>Melli tkmmel les produits dyalk, k-cliquer 3la <strong>"Copier Code"</strong> w collih f <code class="text-gold-400">index.html</code> (blassat <code>let products = [...];</code> f <strong>Ligne 544</strong>).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CUSTOM TOAST NOTIFICATION -->
+    <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <!-- APPLICATION JAVASCRIPT -->
+    <script>
+        // Store Owner Configuration
+        const STORE_WHATSAPP = "212776337140"; // 0776337140 formatted for international WhatsApp links
+        const STORE_EMAIL = "accessoriesniche@gmail.com";
+
+        // ============================================================================
+        // 👇 START PRODUITS (HNA FIN T-COLLI L-CODE LI COPIITI MN ADMIN - LIGNE 544) 👇
+        // ============================================================================
+        let products = [
+            {
+                id: 1,
+                name: "Royal Chrono Gold Edition",
+                category: "watches",
+                priceMAD: 1290,
+                oldPriceMAD: 1650,
+                rating: 5.0,
+                reviews: 128,
+                badge: "BEST SELLER",
+                image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80",
+                specs: "41mm Case • Sapphire Glass • 316L Gold-Tone Steel • Chronograph Movement",
+                description: "Our flagship chronograph crafted with brushed surgical steel, luminous hands, and a bold octagonal bezel that commands attention in any room."
+            },
+            {
+                id: 2,
+                name: "Obsidian Skeleton Automatic",
+                category: "watches",
+                priceMAD: 1490,
+                oldPriceMAD: 1890,
+                rating: 4.9,
+                reviews: 94,
+                badge: "AUTOMATIC",
+                image: "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=800&q=80",
+                specs: "42mm Case • Self-Winding Mechanical • Open Heart Dial • 5 ATM Waterproof",
+                description: "Experience mechanical artistry on your wrist. No battery required—powered naturally by the motion of your wrist with an exhibition glass back."
+            },
+            {
+                id: 3,
+                name: "Imperial Emerald Diver Watch",
+                category: "watches",
+                priceMAD: 1150,
+                oldPriceMAD: 1400,
+                rating: 4.8,
+                reviews: 76,
+                badge: "NEW ARRIVAL",
+                image: "https://images.unsplash.com/photo-1547996160-81dfa63595aa?auto=format&fit=crop&w=800&q=80",
+                specs: "40mm Case • Sunburst Green Dial • Ceramic Rotating Bezel • 10 ATM",
+                description: "Striking emerald sunburst dial paired with a two-tone stainless steel jubilee bracelet for effortless day-to-night versatility."
+            },
+            {
+                id: 4,
+                name: "Minimalist Rose Gold Mesh",
+                category: "watches",
+                priceMAD: 850,
+                oldPriceMAD: 1100,
+                rating: 4.9,
+                reviews: 62,
+                badge: "UNISEX",
+                image: "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=800&q=80",
+                specs: "38mm Ultra-Thin Case • Milanese Mesh Strap • Japanese Quartz",
+                description: "Sleek, featherlight, and timeless. Designed for those who appreciate understated Parisian and Milanese elegance."
+            },
+            {
+                id: 5,
+                name: "18K Gold Roman Cuff Bracelet",
+                category: "jewelry",
+                priceMAD: 390,
+                oldPriceMAD: 550,
+                rating: 4.9,
+                reviews: 142,
+                badge: "TRENDING",
+                image: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=800&q=80",
+                specs: "316L Titanium Steel • 18K PVD Gold Plating • Tarnish & Water Proof",
+                description: "Engraved with classic Roman numerals, this cuff stacks seamlessly alongside any luxury watch without scratching the case."
+            },
+            {
+                id: 6,
+                name: "Onyx & Braided Leather Band",
+                category: "jewelry",
+                priceMAD: 290,
+                oldPriceMAD: 390,
+                rating: 4.7,
+                reviews: 53,
+                badge: "HANDCRAFTED",
+                image: "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?auto=format&fit=crop&w=800&q=80",
+                specs: "Genuine Nappa Leather • Magnetic Matte Clasp • Natural Matte Onyx",
+                description: "Rich braided leather combined with a secure magnetic stainless steel clasp for a refined everyday masculine accent."
+            },
+            {
+                id: 7,
+                name: "Monaco Polarized Aviator Shades",
+                category: "leather",
+                priceMAD: 490,
+                oldPriceMAD: 690,
+                rating: 4.9,
+                reviews: 88,
+                badge: "UV400 POLARIZED",
+                image: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=800&q=80",
+                specs: "Gold Titanium Frame • Anti-Glare Polarized Lens • Leather Case Included",
+                description: "Engineered with lightweight titanium temples and high-contrast polarized lenses to protect your eyes with coastal Riviera flair."
+            },
+            {
+                id: 8,
+                name: "Niche Accessories VIP Prestige Box",
+                category: "watches",
+                priceMAD: 1790,
+                oldPriceMAD: 2400,
+                rating: 5.0,
+                reviews: 215,
+                badge: "VIP GIFT SET",
+                image: "https://images.unsplash.com/photo-1509941943102-10c232535736?auto=format&fit=crop&w=800&q=80",
+                specs: "Includes Watch + Leather Bracelet + Cufflinks + Royal Collector Box",
+                description: "The ultimate luxury bundle by Niche Accessories. Delivered in a bespoke lacquered gift box ready to impress."
+            },
+            {
+                id: 9,
+                name: "Saffiano Leather Cardholder & Wallet",
+                category: "leather",
+                priceMAD: 350,
+                oldPriceMAD: 480,
+                rating: 4.8,
+                reviews: 67,
+                badge: "RFID BLOCKING",
+                image: "https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&w=800&q=80",
+                specs: "Full-Grain Calfskin • Gold Foil Monogram • 8 Card Slots + Billfold",
+                description: "Slim profile full-grain leather wallet with built-in RFID protection to keep your cards safe and your pocket silhouette sharp."
+            },
+            {
+                id: 10,
+                name: "Cuban Link Sovereign Chain & Bracelet",
+                category: "jewelry",
+                priceMAD: 450,
+                oldPriceMAD: 600,
+                rating: 4.8,
+                reviews: 91,
+                badge: "WATERPROOF",
+                image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80",
+                specs: "8mm Miami Cuban Link • Custom Box Clasp • Sweat & Ocean Safe",
+                description: "Heavyweight diamond-cut links that catch the light from every angle. Guaranteed never to fade, tarnish, or turn skin green."
+            },
+            {
+                id: 11,
+                name: "Silver Chronograph Moonphase",
+                category: "watches",
+                priceMAD: 1350,
+                oldPriceMAD: 1700,
+                rating: 4.9,
+                reviews: 84,
+                badge: "COLLECTOR",
+                image: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=800&q=80",
+                specs: "41mm Brushed Steel • Moonphase Sub-dial • Genuine Alligator-Grain Strap",
+                description: "Classic horology meets contemporary sophistication with a sapphire crystal face and deep midnight blue dial."
+            },
+            {
+                id: 12,
+                name: "Havana Tortoise Square Sunglasses",
+                category: "leather",
+                priceMAD: 450,
+                oldPriceMAD: 600,
+                rating: 4.7,
+                reviews: 49,
+                badge: "HAND-POLISHED",
+                image: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=800&q=80",
+                specs: "Italian Acetate Frame • Gold Temple Core • UV400 Gradient Lenses",
+                description: "Bold architectural acetate frames accented with signature gold hinges for an unmistakable executive look."
+            }
+        ];
+        // ============================================================================
+        // 👆 END PRODUITS (HNA KAYSSALI L-CODE DYAL LES PRODUITS - LIGNE 691) 👆
+        // ============================================================================
+
+        // Load saved products from Owner's browser if available
+        const savedCatalog = localStorage.getItem('niche_accessories_products');
+        if (savedCatalog) {
+            try {
+                products = JSON.parse(savedCatalog);
+            } catch (e) {
+                console.error(e);
+            }
+        }
+
+        function saveCatalogToStorage() {
+            try {
+                localStorage.setItem('niche_accessories_products', JSON.stringify(products));
+            } catch (e) {
+                console.warn('Storage limit reached for local preview');
+            }
+        }
+
+        // --- 2. APPLICATION STATE ---
+        let cart = [
+            { ...products[0], quantity: 1 }
+        ];
+        let currentCategory = 'all';
+        let currentSearch = '';
+        let currentSort = 'featured';
+        let currentCurrency = 'MAD';
+        let promoApplied = false;
+
+        const currencyRates = {
+            MAD: { rate: 1, symbol: ' MAD', prefix: false },
+            USD: { rate: 0.10, symbol: '$', prefix: true },
+            EUR: { rate: 0.092, symbol: '€', prefix: true }
+        };
+
+        // --- 3. CURRENCY FORMATTING ---
+        function formatPrice(madAmount) {
+            const cfg = currencyRates[currentCurrency];
+            const converted = Math.round(madAmount * cfg.rate);
+            return cfg.prefix ? `${cfg.symbol}${converted.toLocaleString()}` : `${converted.toLocaleString()}${cfg.symbol}`;
+        }
+
+        function changeCurrency(newCurr) {
+            currentCurrency = newCurr;
+            renderProducts();
+            updateCartUI();
+            showToast(`Currency switched to ${newCurr}`);
+        }
+
+        // --- 4. RENDER PRODUCT GRID ---
+        function renderProducts() {
+            const grid = document.getElementById('productGrid');
+            const emptyState = document.getElementById('emptyState');
+
+            // Filter by category and search
+            let filtered = products.filter(p => {
+                const matchesCat = currentCategory === 'all' || p.category === currentCategory;
+                const matchesSearch = p.name.toLowerCase().includes(currentSearch.toLowerCase()) ||
+                                      p.specs.toLowerCase().includes(currentSearch.toLowerCase()) ||
+                                      p.category.toLowerCase().includes(currentSearch.toLowerCase());
+                return matchesCat && matchesSearch;
+            });
+
+            // Sort products
+            if (currentSort === 'price-asc') {
+                filtered.sort((a, b) => a.priceMAD - b.priceMAD);
+            } else if (currentSort === 'price-desc') {
+                filtered.sort((a, b) => b.priceMAD - a.priceMAD);
+            } else if (currentSort === 'rating') {
+                filtered.sort((a, b) => b.rating - a.rating);
+            }
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+            grid.innerHTML = filtered.map(product => `
+                <div class="group bg-charcoal border border-slate-800/90 hover:border-gold-400/50 rounded-2xl overflow-hidden flex flex-col justify-between transition duration-300 shadow-lg">
+                    <div>
+                        <!-- Product Image Box -->
+                        <div class="relative aspect-square bg-slate-900 overflow-hidden">
+                            <img 
+                                src="${product.image}" 
+                                onerror="this.src='https://placehold.co/600x600/12151e/c8a46e?text=Niche+Accessories'"
+                                alt="${product.name}" 
+                                onclick="openQuickView(${product.id})"
+                                class="w-full h-full object-cover object-center group-hover:scale-105 transition duration-500 cursor-pointer"
+                            >
+                            <span class="absolute top-3 left-3 bg-obsidian/85 backdrop-blur-md border border-gold-400/40 text-gold-400 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full">
+                                ${product.badge}
+                            </span>
+                            <button 
+                                onclick="openQuickView(${product.id})" 
+                                class="absolute bottom-3 right-3 w-9 h-9 rounded-full bg-obsidian/85 text-white hover:text-gold-400 border border-slate-700 flex items-center justify-center opacity-90 group-hover:opacity-100 transition"
+                                title="Quick View"
+                            >
+                                <i class="fa-regular fa-eye text-xs"></i>
+                            </button>
+                        </div>
+
+                        <!-- Product Details -->
+                        <div class="p-4">
+                            <div class="flex items-center justify-between text-xs text-gray-400 mb-1">
+                                <span class="uppercase tracking-wider text-[10px] text-gold-400 font-semibold">${product.category}</span>
+                                <span class="flex items-center gap-1 text-amber-400">
+                                    <i class="fa-solid fa-star text-[10px]"></i>
+                                    <strong class="text-gray-200">${product.rating}</strong>
+                                    <span class="text-gray-500">(${product.reviews})</span>
+                                </span>
+                            </div>
+                            <h3 onclick="openQuickView(${product.id})" class="font-serif text-base font-bold text-white group-hover:text-gold-400 transition cursor-pointer line-clamp-1">
+                                ${product.name}
+                            </h3>
+                            <p class="text-xs text-gray-400 mt-1 line-clamp-1">${product.specs}</p>
+                        </div>
+                    </div>
+
+                    <!-- Price & Add Button -->
+                    <div class="px-4 pb-4 pt-2 border-t border-slate-800/60 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs text-gray-500 line-through block">${formatPrice(product.oldPriceMAD)}</span>
+                            <span class="text-base font-bold text-gold-400">${formatPrice(product.priceMAD)}</span>
+                        </div>
+                        <button 
+                            onclick="addToCart(${product.id})" 
+                            class="px-3.5 py-2 rounded-xl gold-gradient-bg text-obsidian font-bold text-xs uppercase tracking-wider hover:scale-105 active:scale-95 transition flex items-center gap-1.5"
+                        >
+                            <i class="fa-solid fa-plus text-[10px]"></i>
+                            <span>Add</span>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // --- 5. FILTERING, SEARCHING & SORTING ---
+        function filterCategory(category) {
+            currentCategory = category;
+            document.querySelectorAll('.category-tab').forEach(btn => {
+                btn.className = "category-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-medium bg-charcoal text-gray-300 hover:text-white border border-slate-800 transition";
+            });
+            const activeBtn = document.getElementById(`tab-${category}`);
+            if (activeBtn) {
+                activeBtn.className = "category-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition gold-gradient-bg text-obsidian";
+            }
+            renderProducts();
+        }
+
+        function handleSearch(query) {
+            currentSearch = query;
+            renderProducts();
+        }
+
+        function clearSearch() {
+            currentSearch = '';
+            document.getElementById('topSearchInput').value = '';
+            renderProducts();
+        }
+
+        function resetFilters() {
+            currentSearch = '';
+            const input = document.getElementById('topSearchInput');
+            if (input) input.value = '';
+            filterCategory('all');
+        }
+
+        function handleSort(sortValue) {
+            currentSort = sortValue;
+            renderProducts();
+        }
+
+        function toggleSearchBar() {
+            const bar = document.getElementById('searchBarContainer');
+            bar.classList.toggle('hidden');
+            if (!bar.classList.contains('hidden')) {
+                document.getElementById('topSearchInput').focus();
+            }
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const icon = document.getElementById('mobileMenuIcon');
+            menu.classList.toggle('hidden');
+            icon.className = menu.classList.contains('hidden') ? 'fa-solid fa-bars text-xl' : 'fa-solid fa-xmark text-xl';
+        }
+
+        // --- 6. QUICK VIEW MODAL ---
+        function openQuickView(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+
+            const modal = document.getElementById('quickViewModal');
+            const content = document.getElementById('quickViewContent');
+
+            content.innerHTML = `
+                <div class="bg-slate-900 aspect-square md:aspect-auto">
+                    <img 
+                        src="${product.image}" 
+                        onerror="this.src='https://placehold.co/600x600/12151e/c8a46e?text=Niche+Accessories'"
+                        alt="${product.name}" 
+                        class="w-full h-full object-cover"
+                    >
+                </div>
+                <div class="p-6 sm:p-8 flex flex-col justify-between space-y-5">
+                    <div class="space-y-3">
+                        <span class="px-3 py-1 rounded-full bg-gold-400/15 border border-gold-400/30 text-gold-400 text-[10px] font-bold uppercase tracking-widest">
+                            ${product.badge}
+                        </span>
+                        <h3 class="font-serif text-2xl font-bold text-white">${product.name}</h3>
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl font-bold text-gold-400">${formatPrice(product.priceMAD)}</span>
+                            <span class="text-sm text-gray-500 line-through">${formatPrice(product.oldPriceMAD)}</span>
+                        </div>
+                        <p class="text-gray-300 text-xs sm:text-sm leading-relaxed">${product.description}</p>
+                        <div class="p-3 rounded-xl bg-obsidian border border-slate-800 text-xs text-gray-300">
+                            <strong class="text-gold-400 block mb-1 uppercase tracking-wider text-[10px]">Technical Specifications:</strong>
+                            ${product.specs}
+                        </div>
+                    </div>
+
+                    <div class="space-y-2.5 pt-2">
+                        <button onclick="addToCart(${product.id}); closeQuickView();" class="w-full py-3.5 rounded-xl gold-gradient-bg text-obsidian font-bold text-xs uppercase tracking-wider hover:opacity-95 transition flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-bag-shopping"></i>
+                            <span>Add to Bag — ${formatPrice(product.priceMAD)}</span>
+                        </button>
+                        <p class="text-[11px] text-center text-gray-400">
+                            <i class="fa-solid fa-check text-green-400 mr-1"></i> In Stock — Ships in 24 Hours with Gift Box
+                        </p>
+                    </div>
+                </div>
+            `;
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeQuickView() {
+            const modal = document.getElementById('quickViewModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function openFeaturedModal() {
+            openQuickView(1);
+        }
+
+        function quickAddHeroProduct() {
+            addToCart(1);
+        }
+
+        // --- 7. SHOPPING CART LOGIC ---
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+
+            const existing = cart.find(item => item.id === productId);
+            if (existing) {
+                existing.quantity += 1;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+
+            updateCartUI();
+            showToast(`Added "${product.name}" to your bag!`);
+        }
+
+        function updateQuantity(productId, delta) {
+            const item = cart.find(i => i.id === productId);
+            if (!item) return;
+
+            item.quantity += delta;
+            if (item.quantity <= 0) {
+                cart = cart.filter(i => i.id !== productId);
+            }
+            updateCartUI();
+        }
+
+        function applyPromoCode() {
+            const code = document.getElementById('promoInput').value.trim().toUpperCase();
+            if (code === 'NICHE10' || code === 'YOUNESS10') {
+                promoApplied = true;
+                updateCartUI();
+                showToast('Promo code applied! 10% OFF');
+            } else {
+                showToast('Invalid code. Try NICHE10 for 10% OFF!');
+            }
+        }
+
+        function updateCartUI() {
+            const countBadge = document.getElementById('cartCountBadge');
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            countBadge.textContent = totalItems;
+
+            const container = document.getElementById('cartItemsContainer');
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-16 space-y-3">
+                        <i class="fa-solid fa-bag-shopping text-4xl text-slate-700"></i>
+                        <p class="font-serif text-lg text-white">Your bag is currently empty</p>
+                        <p class="text-xs text-gray-400">Explore our watches and accessories to add items.</p>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = cart.map(item => `
+                    <div class="flex gap-3.5 bg-obsidian p-3 rounded-2xl border border-slate-800 items-center">
+                        <img src="${item.image}" onerror="this.src='https://placehold.co/100x100/12151e/c8a46e?text=NA'" alt="${item.name}" class="w-16 h-16 rounded-xl object-cover">
+                        <div class="flex-1 min-w-0">
+                            <h4 class="font-serif text-sm font-bold text-white truncate">${item.name}</h4>
+                            <p class="text-xs text-gold-400 font-semibold mt-0.5">${formatPrice(item.priceMAD)}</p>
+                            <div class="flex items-center gap-2 mt-2">
+                                <button onclick="updateQuantity(${item.id}, -1)" class="w-6 h-6 rounded-lg bg-charcoal border border-slate-700 text-xs text-gray-300 hover:border-gold-400">-</button>
+                                <span class="text-xs font-semibold w-5 text-center">${item.quantity}</span>
+                                <button onclick="updateQuantity(${item.id}, 1)" class="w-6 h-6 rounded-lg bg-charcoal border border-slate-700 text-xs text-gray-300 hover:border-gold-400">+</button>
+                            </div>
+                        </div>
+                        <button onclick="updateQuantity(${item.id}, -99)" class="text-gray-500 hover:text-red-400 p-1">
+                            <i class="fa-regular fa-trash-can text-sm"></i>
+                        </button>
+                    </div>
+                `).join('');
+            }
+
+            // Calculate totals
+            const subtotalMAD = cart.reduce((sum, item) => sum + (item.priceMAD * item.quantity), 0);
+            const discountMAD = promoApplied ? Math.round(subtotalMAD * 0.10) : 0;
+            const finalMAD = subtotalMAD - discountMAD;
+
+            document.getElementById('cartSubtotal').textContent = formatPrice(subtotalMAD);
+            const discountRow = document.getElementById('discountRow');
+            if (promoApplied && subtotalMAD > 0) {
+                discountRow.classList.remove('hidden');
+                discountRow.classList.add('flex');
+                document.getElementById('cartDiscount').textContent = `-${formatPrice(discountMAD)}`;
+            } else {
+                discountRow.classList.add('hidden');
+            }
+            document.getElementById('cartTotal').textContent = formatPrice(finalMAD);
+        }
+
+        function toggleCartDrawer() {
+            const overlay = document.getElementById('cartDrawerOverlay');
+            overlay.classList.toggle('hidden');
+        }
+
+        // --- 8. CHECKOUT (SENDS ORDER TO EMAIL: accessoriesniche@gmail.com) & WHATSAPP ---
+        function openCheckoutModal() {
+            if (cart.length === 0) {
+                showToast('Please add at least one item to your bag first.');
+                return;
+            }
+            toggleCartDrawer();
+            const modal = document.getElementById('checkoutModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeCheckoutModal() {
+            const modal = document.getElementById('checkoutModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        async function submitOrder(e) {
+            e.preventDefault();
+            const btn = document.getElementById('confirmOrderBtn');
+            const name = document.getElementById('custName').value.trim();
+            const phone = document.getElementById('custPhone').value.trim();
+            const city = document.getElementById('custCity').value.trim();
+            const address = document.getElementById('custAddress').value.trim();
+
+            const orderItemsText = cart.map(item => `${item.quantity}x ${item.name} (${item.priceMAD * item.quantity} MAD)`).join(' | ');
+            const totalText = document.getElementById('cartTotal').textContent;
+
+            // Show loading state while sending email notification
+            const originalBtnHtml = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = `<i class="fa-solid fa-circle-notch fa-spin"></i> <span>Sending Order...</span>`;
+
+            try {
+                // Send automatic order confirmation email to accessoriesniche@gmail.com via FormSubmit AJAX
+                await fetch(`https://formsubmit.co/ajax/${STORE_EMAIL}`, {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        _subject: `Nouvelle Commande Niche Accessories - ${name} (${city})`,
+                        Nom_Client: name,
+                        Telephone: phone,
+                        Ville: city,
+                        Adresse_Livraison: address,
+                        Articles_Commandes: orderItemsText,
+                        Total_A_Payer: totalText,
+                        _template: "table"
+                    })
+                });
+            } catch (err) {
+                console.warn("Background email service notice:", err);
+            }
+
+            btn.disabled = false;
+            btn.innerHTML = originalBtnHtml;
+
+            cart = [];
+            promoApplied = false;
+            updateCartUI();
+            closeCheckoutModal();
+            document.getElementById('checkoutForm').reset();
+            showToast(`Thank you ${name}! Your order to ${city} has been sent to Niche Accessories.`);
+        }
+
+        function checkoutViaWhatsApp() {
+            if (cart.length === 0) {
+                showToast('Your shopping bag is empty!');
+                return;
+            }
+            const lines = cart.map(item => `• ${item.quantity}x ${item.name} (${formatPrice(item.priceMAD * item.quantity)})`);
+            const totalText = document.getElementById('cartTotal').textContent;
+            const message = encodeURIComponent(
+                `Bonjour Niche Accessories! Je souhaite commander:\n\n${lines.join('\n')}\n\nTotal: ${totalText}`
+            );
+            window.open(`https://wa.me/${STORE_WHATSAPP}?text=${message}`, '_blank');
+        }
+
+        function openWhatsAppDirect() {
+            const message = encodeURIComponent("Bonjour Niche Accessories! J'ai une question concernant votre collection.");
+            window.open(`https://wa.me/${STORE_WHATSAPP}?text=${message}`, '_blank');
+        }
+
+        function handleNewsletter(e) {
+            e.preventDefault();
+            e.target.reset();
+            showToast('Welcome to the Niche Accessories VIP Club! Use code NICHE10 at checkout.');
+        }
+
+        // --- 8B. SECRET OWNER ACCESS + ADMIN PANEL (PIN is completely hidden from UI) ---
+        const OWNER_PIN = '2026';
+        let uploadedImageDataUrl = '';
+
+        function openOwnerPinModal() {
+            const modal = document.getElementById('ownerPinModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            setTimeout(() => document.getElementById('ownerPinInput').focus(), 100);
+        }
+
+        function closeOwnerPinModal() {
+            const modal = document.getElementById('ownerPinModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function verifyOwnerPin(e) {
+            e.preventDefault();
+            const entered = document.getElementById('ownerPinInput').value.trim();
+            if (entered === OWNER_PIN) {
+                closeOwnerPinModal();
+                document.getElementById('ownerPinInput').value = '';
+                const adminBtn = document.getElementById('secretAdminBtn');
+                adminBtn.classList.remove('hidden');
+                adminBtn.classList.add('flex');
+                openAdminModal();
+                showToast('Mode Propriétaire activé.');
+            } else {
+                document.getElementById('ownerPinInput').value = '';
+                showToast('Code d\'accès incorrect.');
+            }
+        }
+
+        function openAdminModal() {
+            const modal = document.getElementById('adminModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            renderAdminProductList();
+        }
+
+        function closeAdminModal() {
+            const modal = document.getElementById('adminModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function handleImageUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                uploadedImageDataUrl = e.target.result;
+                document.getElementById('adminImagePreview').src = uploadedImageDataUrl;
+                document.getElementById('prodImageUrl').value = '';
+                showToast('Tswira t-chargat b naja7!');
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function updatePreviewFromUrl(url) {
+            if (url.trim() !== '') {
+                uploadedImageDataUrl = '';
+                document.getElementById('adminImagePreview').src = url.trim();
+            }
+        }
+
+        function handleSaveProduct(e) {
+            e.preventDefault();
+            const editId = document.getElementById('editProductId').value;
+            const name = document.getElementById('prodName').value.trim();
+            const category = document.getElementById('prodCategory').value;
+            const priceMAD = parseInt(document.getElementById('prodPrice').value, 10) || 500;
+            const oldPriceMAD = parseInt(document.getElementById('prodOldPrice').value, 10) || Math.round(priceMAD * 1.3);
+            const badge = document.getElementById('prodBadge').value.trim().toUpperCase() || 'NEW ARRIVAL';
+            const urlInput = document.getElementById('prodImageUrl').value.trim();
+            const specs = document.getElementById('prodSpecs').value.trim() || 'Luxury Finish • Water Resistant • 2-Year Warranty';
+            const description = document.getElementById('prodDesc').value.trim() || `Exclusive ${name} curated by Niche Accessories.`;
+
+            const finalImage = uploadedImageDataUrl || urlInput || 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80';
+
+            if (editId) {
+                const index = products.findIndex(p => p.id === parseInt(editId, 10));
+                if (index !== -1) {
+                    products[index] = {
+                        ...products[index],
+                        name,
+                        category,
+                        priceMAD,
+                        oldPriceMAD,
+                        badge,
+                        image: finalImage,
+                        specs,
+                        description
+                    };
+                    showToast(`Produit "${name}" t-modifia b naja7!`);
+                }
+            } else {
+                const newId = products.length > 0 ? Math.max(...products.map(p => p.id)) + 1 : 1;
+                const newProduct = {
+                    id: newId,
+                    name,
+                    category,
+                    priceMAD,
+                    oldPriceMAD,
+                    rating: 5.0,
+                    reviews: 18,
+                    badge,
+                    image: finalImage,
+                    specs,
+                    description
+                };
+                products.unshift(newProduct);
+                showToast(`Produit "${name}" t-zad f site dyalk!`);
+            }
+
+            saveCatalogToStorage();
+            resetAdminForm();
+            renderProducts();
+            renderAdminProductList();
+        }
+
+        function editProductInAdmin(productId) {
+            const p = products.find(item => item.id === productId);
+            if (!p) return;
+
+            document.getElementById('adminFormTitle').textContent = `Modifier: ${p.name}`;
+            document.getElementById('editProductId').value = p.id;
+            document.getElementById('prodName').value = p.name;
+            document.getElementById('prodCategory').value = p.category;
+            document.getElementById('prodPrice').value = p.priceMAD;
+            document.getElementById('prodOldPrice').value = p.oldPriceMAD;
+            document.getElementById('prodBadge').value = p.badge;
+            document.getElementById('prodImageUrl').value = p.image.startsWith('data:') ? '' : p.image;
+            document.getElementById('adminImagePreview').src = p.image;
+            document.getElementById('prodSpecs').value = p.specs;
+            document.getElementById('prodDesc').value = p.description;
+            uploadedImageDataUrl = p.image.startsWith('data:') ? p.image : '';
+        }
+
+        function deleteProductFromAdmin(productId) {
+            products = products.filter(p => p.id !== productId);
+            cart = cart.filter(c => c.id !== productId);
+            saveCatalogToStorage();
+            renderProducts();
+            updateCartUI();
+            renderAdminProductList();
+            showToast('Produit t-msa7 mn site.');
+        }
+
+        function resetAdminForm() {
+            document.getElementById('adminProductForm').reset();
+            document.getElementById('editProductId').value = '';
+            document.getElementById('adminFormTitle').textContent = '+ Zid Produit Jdid';
+            document.getElementById('adminImagePreview').src = 'https://placehold.co/120x120/12151e/c8a46e?text=Apercu';
+            uploadedImageDataUrl = '';
+        }
+
+        function renderAdminProductList() {
+            const listEl = document.getElementById('adminProductList');
+            const countEl = document.getElementById('adminProdCount');
+            countEl.textContent = products.length;
+
+            listEl.innerHTML = products.map(p => `
+                <div class="flex items-center justify-between gap-2.5 bg-charcoal p-2.5 rounded-xl border border-slate-800">
+                    <img src="${p.image}" onerror="this.src='https://placehold.co/80x80/12151e/c8a46e?text=NA'" class="w-11 h-11 rounded-lg object-cover">
+                    <div class="flex-1 min-w-0">
+                        <p class="text-xs font-bold text-white truncate">${p.name}</p>
+                        <p class="text-[11px] text-gold-400 font-semibold">${p.priceMAD} MAD <span class="text-gray-500 line-through ml-1">${p.oldPriceMAD} MAD</span></p>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                        <button onclick="editProductInAdmin(${p.id})" class="w-7 h-7 rounded-lg bg-obsidian border border-slate-700 text-gold-400 hover:border-gold-400 flex items-center justify-center text-xs" title="Modifier">
+                            <i class="fa-solid fa-pen"></i>
+                        </button>
+                        <button onclick="deleteProductFromAdmin(${p.id})" class="w-7 h-7 rounded-lg bg-obsidian border border-slate-700 text-red-400 hover:border-red-400 flex items-center justify-center text-xs" title="Supprimer">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function copyProductsCode() {
+            const codeString = `let products = ${JSON.stringify(products, null, 4)};`;
+            const tempInput = document.createElement('textarea');
+            tempInput.value = codeString;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            showToast('Code t-copia! Collih f index.html (Ligne 544).');
+        }
+
+        // Keyboard shortcut for Owner: Shift + A opens PIN modal
+        window.addEventListener('keydown', function(e) {
+            if (e.shiftKey && (e.key === 'A' || e.key === 'a')) {
+                const tag = document.activeElement.tagName;
+                if (tag !== 'INPUT' && tag !== 'TEXTAREA') {
+                    openOwnerPinModal();
+                }
+            }
+        });
+
+        // --- 9. CUSTOM TOAST NOTIFICATION SYSTEM ---
+        function showToast(message) {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = "pointer-events-auto bg-obsidian border border-gold-400 text-white px-4 py-3 rounded-2xl shadow-2xl flex items-center gap-3 text-xs sm:text-sm transform transition-all duration-300 translate-y-2 opacity-0";
+            toast.innerHTML = `
+                <i class="fa-solid fa-circle-check text-gold-400 text-base"></i>
+                <span>${message}</span>
+            `;
+            container.appendChild(toast);
+
+            requestAnimationFrame(() => {
+                toast.classList.remove('translate-y-2', 'opacity-0');
+            });
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-2');
+                setTimeout(() => toast.remove(), 300);
+            }, 3400);
+        }
+
+        // Initialize store on load
+        window.onload = function () {
+            renderProducts();
+            updateCartUI();
+            if (window.location.hash === '#admin') {
+                openOwnerPinModal();
+            }
+        };
+    </script>
+</body>
+</html>
